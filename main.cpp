@@ -15,8 +15,39 @@
  */
 #include <iostream>
 using namespace std;
+
+class point
+{
+public:
+	int get_x(void);
+	int get_y(void);
+	point();
+	point(int x,int y);
+private:
+	int x;
+	int y;
+};
+int point::get_x(void)
+{
+	return x;
+}
+int point::get_y(void)
+{
+	return y;
+}
+point::point():x(11),y(11)
+{
+	
+}
+point::point(int x,int y):x(x),y(y)
+{
+	
+}
 int main(void)
 {
-	cout<<"clear"<<endl;
+	point p_a;
+	point p_b(21,22);
+	cout<<p_a.get_x()<<" "<<p_a.get_y()<<endl;
+	cout<<p_b.get_x()<<" "<<p_b.get_y()<<endl;
 	return 0;
 }
