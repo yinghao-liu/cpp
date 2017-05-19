@@ -14,40 +14,36 @@
  *
  */
 #include <iostream>
+#include <vector>
+#include <string.h>
+#include <map>
 using namespace std;
-
-class point
-{
-public:
-	int get_x(void);
-	int get_y(void);
-	point();
-	point(int x,int y);
-private:
-	int x;
-	int y;
+struct ptrcmp{
+	bool operator() (const char* const& s1, const char* const& s2) const
+	{
+		return strcmp(s1,s2)<0;
+	}
 };
-int point::get_x(void)
-{
-	return x;
-}
-int point::get_y(void)
-{
-	return y;
-}
-point::point():x(11),y(11)
-{
-	
-}
-point::point(int x,int y):x(x),y(y)
-{
-	
-}
 int main(void)
 {
-	point p_a;
-	point p_b(21,22);
-	cout<<p_a.get_x()<<" "<<p_a.get_y()<<endl;
-	cout<<p_b.get_x()<<" "<<p_b.get_y()<<endl;
+	const char *ss[]={"aaa","bbb"};
+	map<const char*,int,ptrcmp> host_map;
+	char arr[20] ="aaa"; 
+	const char* str= "aaa"; 
+
+	host_map.insert(make_pair(ss[0],0));
+	host_map.insert(make_pair(ss[1],1));
+
+	const char* kkk=arr;
+	map<const char*,int,ptrcmp>::iterator iter=host_map.find(arr);
+	cout<<"here arr is :"<<arr<<endl;
+	if (iter != host_map.end()){
+		cout<<"find it"<<endl;
+		cout<<iter->first<<" : "<<iter->second<<endl;
+	}else{
+		cout<<"can not find it"<<endl;
+	}
+
+
 	return 0;
 }
