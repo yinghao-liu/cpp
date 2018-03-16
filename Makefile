@@ -1,4 +1,4 @@
-CPPFLAGS=-g
+CPPFLAGS=-g -std=c++11
 CC=g++
 TARGET := main
 all:$(TARGET)

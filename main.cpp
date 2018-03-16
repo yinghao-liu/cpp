@@ -1,49 +1,37 @@
 /*
- * Copyright (C) 2017 francis_hao <francis_hao@126.com>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or (at
- * your option) any later version.
+ * Copyright (C) 2018 francis_hao <francis_hao@126.com>
  *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE, GOOD TITLE or
- * NON INFRINGEMENT.  See the GNU General Public License for more
- * details.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
 #include <iostream>
-#include <vector>
-#include <string.h>
-#include <map>
 using namespace std;
-struct ptrcmp{
-	bool operator() (const char* const& s1, const char* const& s2) const
-	{
-		return strcmp(s1,s2)<0;
-	}
-};
+enum class A{SPRING, SUMMER};
+enum class B{SPRING, SUMMER};
+enum class C:char{SPRING, SUMMER};
 int main(void)
 {
-	const char *ss[]={"aaa","bbb"};
-	map<const char*,int,ptrcmp> host_map;
-	char arr[20] ="aaa"; 
-	const char* str= "aaa"; 
+	//A a0=SUMMER;	//error: ‘SUMMER’ was not declared in this scope
+	//A a1=0;		//error: cannot convert ‘int’ to ‘A’ in initialization, gcc in c is ok
+	A a=A::SUMMER;	//OK
+	//int a2 = a;	//error: cannot convert ‘A’ to ‘int’ in initialization, g++ in c++98 is ok
+	B b;
+	C c;
+	cout<<sizeof (int)<<endl;//these two are the same
+	cout<<sizeof (b)<<endl;
 
-	host_map.insert(make_pair(ss[0],0));
-	host_map.insert(make_pair(ss[1],1));
-
-	const char* kkk=arr;
-	map<const char*,int,ptrcmp>::iterator iter=host_map.find(arr);
-	cout<<"here arr is :"<<arr<<endl;
-	if (iter != host_map.end()){
-		cout<<"find it"<<endl;
-		cout<<iter->first<<" : "<<iter->second<<endl;
-	}else{
-		cout<<"can not find it"<<endl;
-	}
-
-
+	cout<<sizeof (char)<<endl;//these two are the same
+	cout<<sizeof (c)<<endl;
 	return 0;
 }
