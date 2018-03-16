@@ -17,21 +17,38 @@
  */
 #include <iostream>
 using namespace std;
-enum class A{SPRING, SUMMER};
-enum class B{SPRING, SUMMER};
-enum class C:char{SPRING, SUMMER};
+/**************base******************/
+struct base{
+	void print(double i);
+	void print(const char *i);
+};
+void base::print(double i)
+{
+	cout<<"base:"<<i<<endl;
+}
+void base::print(const char *i)
+{
+	cout<<"base:"<<i<<endl;
+}
+/*************derived******************/
+struct derived: base{
+	using base::print;
+	void print(int i);
+};
+
+void derived::print(int i)
+{
+	cout<<"derived:"<<i<<endl;
+}
+/******************main*********************/
 int main(void)
 {
-	//A a0=SUMMER;	//error: ‘SUMMER’ was not declared in this scope
-	//A a1=0;		//error: cannot convert ‘int’ to ‘A’ in initialization, gcc in c is ok
-	A a=A::SUMMER;	//OK
-	//int a2 = a;	//error: cannot convert ‘A’ to ‘int’ in initialization, g++ in c++98 is ok
-	B b;
-	C c;
-	cout<<sizeof (int)<<endl;//these two are the same
-	cout<<sizeof (b)<<endl;
+	base a;
+	a.print(1.1);
 
-	cout<<sizeof (char)<<endl;//these two are the same
-	cout<<sizeof (c)<<endl;
+	derived b;
+	b.print(1);
+	b.print(1.1);
+	b.print("string");
 	return 0;
 }
