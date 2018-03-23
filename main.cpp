@@ -17,38 +17,33 @@
  */
 #include <iostream>
 using namespace std;
-/**************base******************/
-struct base{
-	void print(double i);
-	void print(const char *i);
-};
-void base::print(double i)
-{
-	cout<<"base:"<<i<<endl;
-}
-void base::print(const char *i)
-{
-	cout<<"base:"<<i<<endl;
-}
-/*************derived******************/
-struct derived: base{
-	using base::print;
-	void print(int i);
-};
+template <typename... T>
+void print(T... val);
 
-void derived::print(int i)
+void print(void)
 {
-	cout<<"derived:"<<i<<endl;
+	cout<<"here end"<<endl;
 }
-/******************main*********************/
+
+template <typename T1, typename... T2>
+void print(T1 start, T2... var)
+{
+	cout<<"sizeof ... now is: "<<sizeof... (var)<<endl;
+	cout<<start<<endl;
+	print(var...);
+}
+
+
 int main(void)
 {
-	base a;
-	a.print(1.1);
-
-	derived b;
-	b.print(1);
-	b.print(1.1);
-	b.print("string");
+	print(1,2,3,4);
 	return 0;
 }
+
+
+
+
+
+
+
+
