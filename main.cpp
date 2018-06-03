@@ -17,29 +17,24 @@
  */
 #include <iostream>
 using namespace std;
-template <typename... T>
-/*变长参数函数模板声明*/
-void print(T... val);
 
-/*边界条件*/
-void print(void)
-{
-	cout<<"here end"<<endl;
-}
 
-/*递归的特例化定义*/
-template <typename T1, typename... T2>
-void print(T1 start, T2... var)
-{
-	cout<<"sizeof ... now is: "<<sizeof... (var)<<endl;
-	cout<<start<<endl;
-	print(var...);
-}
-
+class myexception : public exception{
+public:
+	myexception(const string &what) : message(what){}
+	virtual const char* what() const noexcept{return message.c_str();}
+private:
+	string message;
+};
 
 int main(void)
 {
-	print(1,2,3,4);
+	myexception a("exception a");
+	//there is a copy constructor in base class exception
+	myexception b=a;
+	//throw a;
+	// when I throw a exception b, and there is no catch, the what() function is called automatically;
+	throw b;
 	return 0;
 }
 
