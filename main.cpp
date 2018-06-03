@@ -18,13 +18,16 @@
 #include <iostream>
 using namespace std;
 template <typename... T>
+/*变长参数函数模板声明*/
 void print(T... val);
 
+/*边界条件*/
 void print(void)
 {
 	cout<<"here end"<<endl;
 }
 
+/*递归的特例化定义*/
 template <typename T1, typename... T2>
 void print(T1 start, T2... var)
 {
