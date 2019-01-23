@@ -16,25 +16,32 @@
  *
  */
 #include <iostream>
+#include <stack>
 using namespace std;
 
 
-class myexception : public exception{
-public:
-	myexception(const string &what) : message(what){}
-	virtual const char* what() const noexcept{return message.c_str();}
-private:
-	string message;
-};
 
 int main(void)
 {
-	myexception a("exception a");
-	//there is a copy constructor in base class exception
-	myexception b=a;
-	//throw a;
-	// when I throw a exception b, and there is no catch, the what() function is called automatically;
-	throw b;
+    stack<int> all;
+    all.push(10);
+    all.push(20);
+    /* top() return a reference to the top element
+     * if you use a reference to store the data, when pop and then push a 
+     * new data, the difference is show below
+     */
+    int a = all.top(); 
+    int &b = all.top(); 
+    cout<<"befor pop a "<<a<<endl;
+    cout<<"befor pop b "<<b<<endl;
+    all.pop();
+    cout<<"after pop a "<<a<<endl;
+    cout<<"after pop b "<<b<<endl;
+    cout<<"after pop top "<<all.top()<<endl;
+    all.push(30);
+    cout<<"after push a "<<a<<endl;
+    cout<<"after push b "<<b<<endl;
+
 	return 0;
 }
 
