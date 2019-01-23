@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2018 francis_hao <francis_hao@126.com>
+ * Copyright (C) 2019 francis_hao <francis_hao@126.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,30 +18,24 @@
 #include <iostream>
 #include <stack>
 using namespace std;
+#define Max(a, b) ((a) > (b)) ? (a) : (b)
 
-
-
+class no_trivial
+{
+    no_trivial(int a, int b)
+    {
+        cout<<a<<endl;
+        cout<<b<<endl;
+    }
+};
+class trivial
+{
+};
 int main(void)
 {
-    stack<int> all;
-    all.push(10);
-    all.push(20);
-    /* top() return a reference to the top element
-     * if you use a reference to store the data, when pop and then push a 
-     * new data, the difference is show below
-     */
-    int a = all.top(); 
-    int &b = all.top(); 
-    cout<<"befor pop a "<<a<<endl;
-    cout<<"befor pop b "<<b<<endl;
-    all.pop();
-    cout<<"after pop a "<<a<<endl;
-    cout<<"after pop b "<<b<<endl;
-    cout<<"after pop top "<<all.top()<<endl;
-    all.push(30);
-    cout<<"after push a "<<a<<endl;
-    cout<<"after push b "<<b<<endl;
-
+    cout<<is_trivial<int>::value<<endl;         // 1
+    cout<<is_trivial<trivial>::value<<endl;     // 1
+    cout<<is_trivial<no_trivial>::value<<endl;  // 0
 	return 0;
 }
 
