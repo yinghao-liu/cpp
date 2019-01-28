@@ -30,12 +30,16 @@ class no_trivial
 };
 class trivial
 {
+    string a;
 };
 int main(void)
 {
     cout<<is_trivial<int>::value<<endl;         // 1
     cout<<is_trivial<trivial>::value<<endl;     // 1
     cout<<is_trivial<no_trivial>::value<<endl;  // 0
+    cout<<is_pod<int>::value<<endl;  // 0
+    cout<<is_pod<trivial>::value<<endl;  // 0
+    cout<<is_pod<no_trivial>::value<<endl;  // 0
 	return 0;
 }
 
